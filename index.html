@@ -289,6 +289,32 @@
             z-index: 1;
         }
 
+        /* Fix cursor styles for all interactive elements */
+        .btn, 
+        .nav a, 
+        .filter-btn, 
+        .back-to-top, 
+        .footer-nav a,
+        .course-tag,
+        .project-tag,
+        .social-link,
+        .contact-info a {
+            cursor: pointer !important;
+        }
+
+        /* Specifically ensure buttons have pointer cursor on hover */
+        .btn:hover, 
+        .filter-btn:hover, 
+        .back-to-top:hover {
+            cursor: pointer !important;
+        }
+
+        /* Keep default cursor for email contact method */
+        .contact-method:first-child,
+        .contact-method:first-child .contact-info a {
+            cursor: auto !important;
+        }
+
         /* Center the hero buttons */
         .hero-content {
             position: relative;
@@ -945,6 +971,59 @@
             font-size: 1.05rem;
             font-weight: 400;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Email Notification Styles */
+        .email-notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+        }
+
+        .email-notification.show {
+            opacity: 1;
+            visibility: visible;
+            animation: notificationFade 3s ease;
+        }
+
+        @keyframes notificationFade {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            20% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+                visibility: hidden;
+            }
+        }
+
+        .email-notification i {
+            color: #00d4ff;
+            font-size: 20px;
         }
 
         /* Enhanced Projects Section */
@@ -1607,6 +1686,13 @@
     </style>
 </head>
 <body>
+
+    <!-- Email Copied Notification -->
+    <div id="email-notification" class="email-notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Email copied to clipboard!</span>
+    </div>
+
     <!-- Scroll darkening overlay -->
     <div class="scroll-overlay" id="scroll-overlay"></div>
     <!-- Constellation Background -->
@@ -1783,8 +1869,7 @@
         <div class="project-filters">
             <button class="filter-btn active">All</button>
             <button class="filter-btn">AI</button>
-            <button class="filter-btn">Mobile</button>
-            <button class="filter-btn">Web & Software</button>
+            <button class="filter-btn">Web and Software</button>
             <button class="filter-btn">Data</button>
             <button class="filter-btn">Education</button>
             <button class="filter-btn">UX</button>
@@ -1806,13 +1891,13 @@
             </div>
             
             <div class="project-card">
-                <div class="project-badge">Mobile & AR</div>
+                <div class="project-badge">Web & AI</div>
                 <div class="project-icon">
                     <img src="assets/images/Chrome.png" alt="Chrome" class="project-icon-img">
                 </div>
                 <h3 class="project-title">Ai Chrome Password Manager</h3>
                 <div class="project-tags">
-                    <span class="project-tag">Web & Software</span>
+                    <span class="project-tag">Web and Software</span>
                     <span class="project-tag">UX</span>
                     <span class="project-tag">Design</span>
                     <span class="project-tag">Education</span>
@@ -1820,7 +1905,7 @@
             </div>
             
             <div class="project-card">
-                <div class="project-badge">AI & Education</div>
+                <div class="project-badge">Data & Education</div>
                 <div class="project-icon">📈</div>
                 <h3 class="project-title">Market Trend Prediction Model</h3>
                 <div class="project-tags">
@@ -1891,7 +1976,7 @@
                 
             
             <div class="buttons">
-                <a href="obaidirfan06@gmail.com" class="btn btn-primary">Send Email</a>
+                <a href="#" onclick="copyEmail(); return false;" class="btn btn-primary">Send Email</a>
                 <a onclick="scrollToSection('home')" class="btn btn-secondary">Back to Top</a>
             </div>
         </div>
@@ -1919,11 +2004,12 @@
             <div class="footer-section">
                 <h3>Interests</h3>
                 <ul class="footer-nav">
-                    <li><a>Technical Program Management</a></li>
-                    <li><a>Product Management</a></li>
-                    <li><a>Software Engineering</a></li>
-                    <li><a>Educational Technology</a></li>
-                    <li><a>AR/VR Development</a></li>
+                    <li><a>AI & Machine Learning Research</a></li>
+                    <li><a>Autonomous Systems Development</a></li>
+                    <li><a>Full-Stack Engineering</a></li>
+                    <li><a>Human-Computer Interaction</a></li>
+                    <li><a>AR/VR & Metaverse Technologies</a></li>
+                    <li><a>Educational Technology Innovation</a></li>
                 </ul>
             </div>
         </div>
@@ -1937,6 +2023,27 @@
     <div class="back-to-top" onclick="scrollToSection('home')">↑</div>
 
     <script>
+
+        // Copy email to clipboard function
+        function copyEmail() {
+            const email = 'obaidirfan06@gmail.com';
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Show notification
+                const notification = document.getElementById('email-notification');
+                notification.classList.add('show');
+                
+                // Hide notification after animation completes
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+                alert('Failed to copy email to clipboard. Please manually copy: ' + email);
+            });
+        }
+
         // Three.js sphere animation
         let scene, camera, renderer, spheres = [];
         let mouse = new THREE.Vector2();
@@ -2354,9 +2461,22 @@
                     filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     const filter = this.textContent.toLowerCase();
+                    
                     projectCards.forEach(card => {
+                        // Get all tags from badge and individual tags
                         const badge = card.querySelector('.project-badge').textContent.toLowerCase();
-                        if (filter === 'all' || badge.includes(filter)) {
+                        const tags = Array.from(card.querySelectorAll('.project-tag')).map(tag => 
+                            tag.textContent.toLowerCase()
+                        );
+                        
+                        // Combine all filter criteria
+                        const allFilters = [badge, ...tags];
+                        
+                        // Check if any criteria matches the filter
+                        const shouldShow = filter === 'all' || 
+                                        allFilters.some(item => item.includes(filter));
+                        
+                        if (shouldShow) {
                             card.style.display = 'block';
                             card.style.animation = 'fadeInUp 0.6s ease-out';
                         } else {
