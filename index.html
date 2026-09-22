@@ -19,8 +19,15 @@
             background: #9ba8c4;
             color: #ffffff;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            /* removed scroll-behavior: smooth; Lenis owns scrolling now */
         }
+
+        /* ================= LENIS SMOOTH-SCROLL RESETS ================= */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
 
         /* Scroll-based darkening overlay */
         .scroll-overlay {
@@ -51,7 +58,7 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
-            animation: float 6s ease-in-out infinite;
+            /* animation removed — GSAP drives motion now */
         }
 
         @keyframes float {
@@ -195,7 +202,7 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             cursor: pointer;
             padding: 8px 0;
@@ -203,7 +210,6 @@
 
         .nav a:hover {
             color: #00d4ff;
-            transform: translateY(-2px);
         }
 
         .nav a::after {
@@ -221,7 +227,7 @@
             width: 100%;
         }
 
-        /* Section styling with stagger animations */
+        /* Section styling — CSS entrance animation removed, GSAP owns it now */
         .section {
             min-height: 100vh;
             padding: 100px 50px 50px;
@@ -229,10 +235,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: fadeInUp 1s ease-out;
         }
 
-        /* Ensure all sections except home have dark background */
         .section:not(#home) {
             background: #9ba8c4;
         }
@@ -289,7 +293,7 @@
             z-index: 1;
         }
 
-        /* Fix cursor styles for all interactive elements */
+        /* Cursor styles for interactive elements (magnetic replaces CSS transform) */
         .btn, 
         .nav a, 
         .filter-btn, 
@@ -302,26 +306,23 @@
             cursor: pointer !important;
         }
 
-        /* Specifically ensure buttons have pointer cursor on hover */
         .btn:hover, 
         .filter-btn:hover, 
         .back-to-top:hover {
             cursor: pointer !important;
         }
 
-        /* Keep default cursor for email contact method */
         .contact-method:first-child,
         .contact-method:first-child .contact-info a {
             cursor: auto !important;
         }
 
-        /* Center the hero buttons */
         .hero-content {
             position: relative;
             z-index: 2;
             display: flex;
             flex-direction: column;
-            align-items: center; /* This centers the content horizontally */
+            align-items: center;
             justify-content: center;
             width: 100%;
         }
@@ -331,8 +332,8 @@
             gap: 20px;
             margin-bottom: 100px;
             animation: fadeInUp 1s ease-out 0.6s both;
-            justify-content: center; /* This centers the buttons */
-            width: 100%; /* Ensure it takes full width */
+            justify-content: center;
+            width: 100%;
         }
 
         .name {
@@ -385,13 +386,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .buttons {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 100px;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
         .btn {
             padding: 16px 32px;
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -399,7 +393,7 @@
             font-size: 14px;
             font-weight: 300;
             text-decoration: none;
-            transition: all 0.4s ease;
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
@@ -407,6 +401,7 @@
             backdrop-filter: blur(15px);
             color: rgba(255, 255, 255, 0.9);
             letter-spacing: 1px;
+            /* transform transition removed — magnetic GSAP owns it */
         }
 
         .btn::before {
@@ -435,7 +430,6 @@
         }
 
         .btn:hover {
-            transform: translateY(-2px);
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
@@ -489,7 +483,6 @@
             font-weight: 700;
         }
 
-        /* Beyond the Code Layout Styles */
         .section-subtitle {
             font-size: 1.2rem;
             color: #666;
@@ -507,15 +500,15 @@
             max-width: 1400px;
             margin: 0 auto;
             align-items: flex-start;
-            justify-content: center; /* Add this to center both columns */
-            padding: 0 20px; /* Add padding to prevent edge crowding */
+            justify-content: center;
+            padding: 0 20px;
         }
 
         .large-image-container {
             flex-shrink: 0;
-            width: 45%; /* Slightly reduce width */
+            width: 45%;
             display: flex;
-            justify-content: flex-end; /* Push image to the right within its container */
+            justify-content: flex-end;
         }
 
         .large-image-container .large-square-image {
@@ -532,8 +525,8 @@
             display: flex;
             flex-direction: column;
             gap: 40px;
-            min-width: 50%; /* Adjust to balance with image */
-            max-width: 700px; /* Slightly reduce max-width */
+            min-width: 50%;
+            max-width: 700px;
         }
 
         .content-title {
@@ -659,7 +652,6 @@
             color: #555;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .about-main-layout {
                 flex-direction: column;
@@ -732,13 +724,13 @@
             font-weight: 700;
         }
 
+        /* Fact-item CSS animation removed — GSAP owns entrance */
         .fact-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
             font-size: 1.1rem;
             font-weight: 500;
-            animation: slideInFact 0.8s ease-out;
         }
 
         @keyframes slideInFact {
@@ -751,7 +743,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Enhanced Education Section */
+        /* Enhanced Education Section — CSS anim removed so GSAP entrance works */
         .education-card {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
@@ -761,8 +753,7 @@
             margin: 0 auto;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            animation: cardFloat 6s ease-in-out infinite, fadeInUp 1s ease-out;
-            transition: transform 0.3s ease;
+            transition: box-shadow 0.3s ease;
         }
 
         @keyframes cardFloat {
@@ -771,7 +762,6 @@
         }
 
         .education-card:hover {
-            transform: scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
         }
 
@@ -870,14 +860,14 @@
 
         .timeline-line {
             position: absolute;
-            left: 40px; /* Moved to the right to be visible */
+            left: 40px;
             top: 0;
             bottom: 0;
             width: 4px;
             background: linear-gradient(to bottom, #8b5cf6, #00d4ff);
             border-radius: 2px;
             animation: lineGrow 2s ease-out;
-            z-index: 1; /* Ensure line is above background elements */
+            z-index: 1;
         }
 
         @keyframes lineGrow {
@@ -885,23 +875,24 @@
             to { height: 100%; }
         }
 
+        /* timeline-item: CSS entrance anim + transform transition removed for GSAP */
         .timeline-item {
             position: relative;
             margin-bottom: 60px;
             padding: 40px;
             padding-left: 100px;
-            animation: slideInLeft 0.8s ease-out;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-left: 60px; /* Increased to make room for the line */
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 60px;
             margin-right: 20px;
         }
 
         .timeline-item:hover {
-            transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.12);
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 12px 40px rgba(0, 212, 255, 0.2);
@@ -909,7 +900,7 @@
 
         .timeline-dot {
             position: absolute;
-            left: 28px; /* Adjusted to center on the line */
+            left: 28px;
             top: 40px;
             width: 24px;
             height: 24px;
@@ -917,7 +908,7 @@
             border-radius: 50%;
             border: 4px solid rgba(10, 14, 26, 0.8);
             animation: dotPulse 2s ease-in-out infinite;
-            z-index: 2; /* Ensure dot is above the line */
+            z-index: 2;
             box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
         }
 
@@ -1043,14 +1034,17 @@
             color: #fff;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             animation: fadeInUp 0.6s ease-out;
+            /* transform moved to GSAP magnetic */
         }
 
         .filter-btn.active,
         .filter-btn:hover {
             background: #8b5cf6;
-            transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
         }
 
@@ -1062,14 +1056,16 @@
             margin: 0 auto;
         }
 
+        /* project-card: CSS entrance + cardHover animations removed so GSAP + magnetic own transform */
         .project-card {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 35px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 0.8s ease-out, cardHover 6s ease-in-out infinite;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes cardHover {
@@ -1078,7 +1074,6 @@
         }
 
         .project-card:hover {
-            transform: translateY(-15px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
             border-color: #00d4ff;
         }
@@ -1334,11 +1329,11 @@
             transition: all 0.3s ease;
             cursor: pointer;
             font-weight: 500;
+            display: inline-block;
         }
 
         .footer-nav a:hover {
             color: #00d4ff;
-            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -1422,7 +1417,7 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -1435,7 +1430,6 @@
         }
 
         .back-to-top:hover {
-            transform: scale(1.15) rotate(10deg);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
 
@@ -1515,9 +1509,7 @@
             background: linear-gradient(45deg, #00d4ff, #8b5cf6);
         }
 
-                /* ===================== */
         /* Quick Facts Image Section */
-        /* ===================== */
         .quick-facts-image {
             flex: 1;
             padding: 20px;
@@ -1531,7 +1523,7 @@
 
         .quick-facts-image img {
             width: 100%;
-            max-width: 400px; /* Adjust based on your image */
+            max-width: 400px;
             height: auto;
             border-radius: 15px;
             border: 1px solid rgba(139, 92, 246, 0.3);
@@ -1545,7 +1537,7 @@
         }
 
         .university-logo-img {
-            height: 180px; /* Adjust as needed */
+            height: 180px;
             width: auto;
             margin-bottom: 30px;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
@@ -1553,14 +1545,12 @@
             animation: logoFloat 4s ease-in-out infinite;
         }
 
-        /* Optional gold accent effect */
         .university-logo-img:hover {
             filter: 
                 drop-shadow(0 0 10px rgba(184, 134, 11, 0.7)) 
                 brightness(1.05);
         }
 
-        /* Ensure proper spacing on mobile */
         @media (max-width: 1024px) {
             .about-main-layout {
                 flex-direction: column;
@@ -1585,7 +1575,6 @@
             }
         }
 
-        /* Mobile responsiveness for timeline */
         @media (max-width: 768px) {
             .timeline-item {
                 margin-left: 20px;
@@ -1606,11 +1595,11 @@
         @media (max-width: 768px) {
             .buttons {
                 flex-direction: column;
-                align-items: center; /* Center buttons vertically on mobile */
+                align-items: center;
             }
         }
 
-        /* X-Shaped Under Construction Tape - Fixed Positioning */
+        /* X-Shaped Under Construction Tape */
         .under-construction {
             position: relative;
             overflow: hidden;
@@ -1674,7 +1663,6 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        /* Make the project card content slightly faded */
         .under-construction .project-badge,
         .under-construction .project-icon,
         .under-construction .project-title,
@@ -1682,10 +1670,76 @@
             opacity: 0.7;
         }
 
-                
+        /* ============================================================
+           PREMIUM MOTION LAYER — Ambient Grid + Custom Cursor Follower
+           ============================================================ */
+
+        /* ---------- Ambient Tech Grid Backdrop ---------- */
+        .tech-grid {
+            position: fixed;
+            top: -80px;
+            left: -80px;
+            width: calc(100vw + 160px);
+            height: calc(100vh + 160px);
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.055) 1px, transparent 1px);
+            background-size: 80px 80px;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0.9), rgba(0,0,0,0.08) 88%);
+                    mask-image: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0.9), rgba(0,0,0,0.08) 88%);
+            will-change: transform;
+            opacity: 0.75;
+        }
+
+        /* ---------- Custom Cursor Follower ---------- */
+        .cursor-follower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffffff;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            will-change: transform;
+            display: none;
+            opacity: 0;
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        /* Only enable custom cursor on true desktop devices with a fine pointer */
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-follower { display: block; }
+
+            /* Hide native cursor only when the custom cursor is active */
+            body.custom-cursor-active,
+            body.custom-cursor-active *,
+            body.custom-cursor-active .btn,
+            body.custom-cursor-active .nav a,
+            body.custom-cursor-active .filter-btn,
+            body.custom-cursor-active .back-to-top,
+            body.custom-cursor-active .footer-nav a,
+            body.custom-cursor-active .course-tag,
+            body.custom-cursor-active .project-tag,
+            body.custom-cursor-active .social-link,
+            body.custom-cursor-active .contact-info a,
+            body.custom-cursor-active .contact-method {
+                cursor: none !important;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Ambient Tech Grid Backdrop -->
+    <div class="tech-grid" aria-hidden="true"></div>
+
+    <!-- Custom Cursor Follower (hidden on touch devices) -->
+    <div class="cursor-follower" id="cursor-follower" aria-hidden="true"></div>
 
     <!-- Email Copied Notification -->
     <div id="email-notification" class="email-notification">
@@ -1735,14 +1789,11 @@
     <p class="section-subtitle">AI and software are my playground, but life extends far past the screen. Here’s a glimpse of that side of me.</p>
     
     <div class="about-main-layout">
-        <!-- Large square image on left -->
         <div class="large-image-container">
             <img src="assets/images/website%201.jpg" alt="About Me" class="large-square-image">
         </div>
         
-        <!-- All content on right -->
         <div class="all-content-right">
-            <!-- My Journey Section -->
             <div class="journey-section">
                 <h3 class="content-title">My Journey</h3>
                 <p class="content-text">Growing up in Marietta, I became fascinated by how technology shapes the world around us. I focus on building AI, robotics, and software systems that solve practical problems and create real impact.</p>
@@ -1750,7 +1801,6 @@
                 <p class="content-text">At Georgia Tech, I study Computer Science with a focus on Intelligence and Information Internetworks, while independently exploring AI topics including LLMs, RAG, NLP, machine vision, and machine learning. I apply these concepts through hands-on projects involving data pipelines, distributed systems, and optimization, strengthening my software engineering and problem-solving skills.</p>
             </div>
             
-            <!-- When I'm Not Coding Section -->
             <div class="interests-section">
                 <h3 class="content-title">When I'm Not Coding</h3>
                 <div class="interests-grid">
@@ -1821,7 +1871,6 @@
         <div class="experience-timeline">
             <div class="timeline-line"></div>
             
-            <!-- NEW: Current Undergraduate Researcher Position -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">August 2025 - Present</div>
@@ -1835,7 +1884,6 @@
                 <p class="job-description">👥 Presented system results at GURC, demonstrating measurable routing improvements and validating the underlying software architecture used to support large-scale agricultural navigation.</p>
             </div>
             
-            <!-- Home Depot Position -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">April 2025 - Present</div>
@@ -1849,7 +1897,6 @@
                 <p class="job-description">👥 Provide technical assistance to improve customer outcomes, streamline requests, and enhance team service quality.</p>
             </div>
             
-            <!-- Previous Undergraduate Researcher Position -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">September 2024 - April 2025</div>
@@ -1977,7 +2024,7 @@
                         <p><a href="https://github.com/ObaidIrfan" target="_blank">Check out my code and projects</a></p>
                     </div>
                 </div>
-                
+            </div>
             
             <div class="buttons">
                 <a href="#" onclick="copyEmail(); return false;" class="btn btn-primary">Send Email</a>
@@ -2026,19 +2073,15 @@
     <!-- Back to top button -->
     <div class="back-to-top" onclick="scrollToSection('home')">↑</div>
 
+    <!-- ============================================================
+         CORE SITE SCRIPT — Three.js, typing, scroll helpers, backgrounds
+         ============================================================ -->
     <script>
-
-        // Copy email to clipboard function
         function copyEmail() {
             const email = 'obaidirfan06@gmail.com';
-            
-            // Copy to clipboard
             navigator.clipboard.writeText(email).then(() => {
-                // Show notification
                 const notification = document.getElementById('email-notification');
                 notification.classList.add('show');
-                
-                // Hide notification after animation completes
                 setTimeout(() => {
                     notification.classList.remove('show');
                 }, 2500);
@@ -2048,7 +2091,7 @@
             });
         }
 
-        // Three.js sphere animation
+        // ---- Three.js sphere animation ----
         let scene, camera, renderer, spheres = [];
         let mouse = new THREE.Vector2();
         let targetRotation = new THREE.Vector2();
@@ -2056,9 +2099,8 @@
 
         function initSphereAnimation() {
             const container = document.getElementById('sphere-container');
-            if (!container) return; // Safety check
+            if (!container) return;
             
-            // Scene setup
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -2070,15 +2112,13 @@
             renderer.domElement.style.pointerEvents = 'none';
             container.appendChild(renderer.domElement);
 
-            // Create spheres
-            const sphereGeometry = new THREE.SphereGeometry(1.2, 32, 32); // Even bigger spheres
-            const sphereMaterial = new THREE.MeshLambertMaterial({ // Changed to Lambert for softer shading
+            const sphereGeometry = new THREE.SphereGeometry(1.2, 32, 32);
+            const sphereMaterial = new THREE.MeshLambertMaterial({
                 color: 0xffffff,
-                transparent: false, // Remove transparency
+                transparent: false,
                 opacity: 1.0
             });
 
-            // Create cluster of spheres
             const positions = [
                 [0, 0, 0], [2.2, 0, 0], [-2.2, 0, 0], [0, 2.2, 0], [0, -2.2, 0],
                 [1.1, 1.9, 0], [-1.1, 1.9, 0], [1.1, -1.9, 0], [-1.1, -1.9, 0],
@@ -2090,28 +2130,19 @@
 
             for (let i = 0; i < positions.length; i++) {
                 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial.clone());
-                
                 sphere.position.x = positions[i][0];
                 sphere.position.y = positions[i][1];
                 sphere.position.z = positions[i][2];
-
                 sphere.castShadow = true;
                 sphere.receiveShadow = true;
                 
-                // Soft pink/beige colors matching the reference
                 const colors = [
-                    0xe8d5d5, // soft pink
-                    0xf0e6e6, // pale pink
-                    0xddc9c9, // dusty rose
-                    0xe6d1d1, // light mauve
-                    0xf2e8e8, // very pale pink
-                    0xd4c0c0, // muted pink
-                    0xe0cccc  // soft beige-pink
+                    0xe8d5d5, 0xf0e6e6, 0xddc9c9, 0xe6d1d1,
+                    0xf2e8e8, 0xd4c0c0, 0xe0cccc
                 ];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 sphere.material.color.setHex(randomColor);
                 
-                // Store original position
                 sphere.originalPosition = sphere.position.clone();
                 sphere.velocity = new THREE.Vector3(0, 0, 0);
                 
@@ -2119,7 +2150,6 @@
                 scene.add(sphere);
             }
 
-            // Softer, more realistic lighting
             const ambientLight = new THREE.AmbientLight(0xe6d7d7, 0.4);
             scene.add(ambientLight);
 
@@ -2134,7 +2164,6 @@
 
             camera.position.z = 8;
 
-            // Mouse interaction for spheres only
             document.addEventListener('mousemove', onSphereMouseMove);
             window.addEventListener('resize', onWindowResize);
             
@@ -2142,7 +2171,6 @@
         }
 
         function onSphereMouseMove(event) {
-            // Only affect spheres when mouse is over the home section
             const homeSection = document.getElementById('home');
             const rect = homeSection.getBoundingClientRect();
             
@@ -2153,7 +2181,6 @@
                 targetRotation.x = mouse.y * 0.2;
                 targetRotation.y = mouse.x * 0.2;
                 
-                // Push spheres away from mouse
                 const mouseVector = new THREE.Vector3(mouse.x * 5, mouse.y * 5, 0);
                 
                 spheres.forEach(sphere => {
@@ -2176,42 +2203,31 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            
             if (!scene || !renderer || !camera) return;
             
-            // Smooth rotation
             currentRotation.x += (targetRotation.x - currentRotation.x) * 0.05;
             currentRotation.y += (targetRotation.y - currentRotation.y) * 0.05;
             
-            // Update spheres
             spheres.forEach((sphere, index) => {
-                // Apply velocity
                 sphere.position.add(sphere.velocity);
-                
-                // Damping
                 sphere.velocity.multiplyScalar(0.95);
                 
-                // Return to original position
                 const returnForce = sphere.originalPosition.clone().sub(sphere.position).multiplyScalar(0.02);
                 sphere.velocity.add(returnForce);
                 
-                // Floating motion
                 sphere.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
                 sphere.position.x += Math.cos(Date.now() * 0.0015 + index) * 0.001;
                 
-                // Rotate individual spheres
                 sphere.rotation.x += 0.005;
                 sphere.rotation.y += 0.005;
             });
             
-            // Rotate entire group
             scene.rotation.x = currentRotation.x;
             scene.rotation.y = currentRotation.y;
             
             renderer.render(scene, camera);
         }
 
-        // Initialize sphere animation and typing effect when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initSphereAnimation();
             startTypingAnimation();
@@ -2222,136 +2238,55 @@
             const text = 'OBAID IRFAN';
             let index = 0;
             
-            // Clear the element
             nameElement.innerHTML = '';
             
             function typeCharacter() {
                 if (index < text.length) {
                     nameElement.innerHTML += text.charAt(index);
                     index++;
-                    setTimeout(typeCharacter, 150); // 150ms delay between characters
+                    setTimeout(typeCharacter, 150);
                 } else {
-                    // Add blinking cursor after typing is complete
                     nameElement.innerHTML += '<span class="typing-cursor">&nbsp;</span>';
                 }
             }
             
-            // Start typing after a brief delay
             setTimeout(typeCharacter, 500);
         }
 
-        // Smooth scrolling function
+        // ---- Smooth scroll — prefers Lenis, falls back to native ----
         function scrollToSection(sectionId) {
             const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            if (!element) return;
+            if (window.__lenis) {
+                window.__lenis.scrollTo(element, { offset: 0, duration: 1.4 });
+            } else {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        // Enhanced floating particles (preserved existing functionality)
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            
-            const size = Math.random() * 6 + 2;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            
-            // Random animation duration
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, 8000);
-        }
-
-        // Subtle geometric shapes
-        function createGeometricAccents() {
-            const shapes = ['square', 'triangle', 'diamond'];
-            
-            setInterval(() => {
-                const accent = document.createElement('div');
-                accent.className = 'geometric-accent';
-                
-                const shape = shapes[Math.floor(Math.random() * shapes.length)];
-                const size = Math.random() * 20 + 10;
-                
-                accent.style.width = size + 'px';
-                accent.style.height = size + 'px';
-                accent.style.left = Math.random() * 100 + '%';
-                accent.style.animationDuration = (Math.random() * 15 + 15) + 's';
-                
-                if (shape === 'triangle') {
-                    accent.style.borderRadius = '0';
-                    accent.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
-                } else if (shape === 'diamond') {
-                    accent.style.borderRadius = '0';
-                    accent.style.transform = 'rotate(45deg)';
-                } else {
-                    accent.style.borderRadius = '2px';
-                }
-                
-                document.body.appendChild(accent);
-                
-                setTimeout(() => {
-                    if (accent.parentNode) {
-                        accent.parentNode.removeChild(accent);
-                    }
-                }, 35000);
-            }, 8000);
-        }
-
-        // Back to top button visibility and scroll darkening effect
+        // ---- Scroll-driven UI (overlay darkening + back-to-top visibility) ----
         window.addEventListener('scroll', function() {
             const backToTop = document.querySelector('.back-to-top');
             const scrollOverlay = document.getElementById('scroll-overlay');
             const scrollPercent = Math.min(window.pageYOffset / window.innerHeight, 1);
             
-            // Darken overlay based on scroll (max 20% opacity)
             const overlayOpacity = scrollPercent * 0.2;
             if (scrollOverlay) {
                 scrollOverlay.style.backgroundColor = `rgba(0, 0, 0, ${overlayOpacity})`;
             }
             
-            // Back to top button
             if (window.pageYOffset > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
             }
-        });
+        }, { passive: true });
 
-        // Enhanced scroll animations (preserved existing functionality)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease-out';
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-
-        // Constellation background effect
+        // ---- Constellation background ----
         function createConstellation() {
             const container = document.getElementById('constellation-bg');
             if (!container) return;
             
-            // Create stars
             for (let i = 0; i < 50; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -2367,10 +2302,9 @@
                 container.appendChild(star);
             }
             
-            // Create connecting lines between nearby stars
             const stars = container.querySelectorAll('.star');
             for (let i = 0; i < stars.length; i++) {
-                if (Math.random() > 0.7) { // Only connect some stars
+                if (Math.random() > 0.7) {
                     const star1 = stars[i];
                     const star2 = stars[Math.floor(Math.random() * stars.length)];
                     
@@ -2385,7 +2319,7 @@
                         Math.pow(rect2.top - rect1.top, 2)
                     );
                     
-                    if (distance < 200) { // Only connect nearby stars
+                    if (distance < 200) {
                         line.style.width = distance + 'px';
                         line.style.left = (rect1.left / window.innerWidth * 100) + '%';
                         line.style.top = (rect1.top / window.innerHeight * 100) + '%';
@@ -2400,7 +2334,7 @@
             }
         }
 
-        // Floating geometric shapes
+        // ---- Floating geometric shapes ----
         function createFloatingShapes() {
             const shapes = ['square', 'triangle', 'hexagon', 'diamond'];
             
@@ -2416,7 +2350,6 @@
                 shape.style.left = Math.random() * 100 + '%';
                 shape.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 
-                // Different shape styles
                 switch(shapeType) {
                     case 'triangle':
                         shape.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
@@ -2444,65 +2377,287 @@
                 }, 20000);
             }, 3000);
         }
+    </script>
 
-        // Initialize all background animations
-        document.addEventListener('DOMContentLoaded', function() {
-            createConstellation();
-            createFloatingShapes();
-            
-            // Create particles periodically
-            setInterval(createParticle, 300);
-            for (let i = 0; i < 20; i++) {
-                setTimeout(createParticle, i * 100);
-            }
-            
-            // Project filter functionality
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const projectCards = document.querySelectorAll('.project-card');
+    <!-- GSAP core + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    const filter = this.textContent.toLowerCase();
-                    
-                    projectCards.forEach(card => {
-                        // Get all tags from badge and individual tags
-                        const badge = card.querySelector('.project-badge').textContent.toLowerCase();
-                        const tags = Array.from(card.querySelectorAll('.project-tag')).map(tag => 
-                            tag.textContent.toLowerCase()
-                        );
-                        
-                        // Combine all filter criteria
-                        const allFilters = [badge, ...tags];
-                        
-                        // Check if any criteria matches the filter
-                        const shouldShow = filter === 'all' || 
-                                        allFilters.some(item => item.includes(filter));
-                        
-                        if (shouldShow) {
-                            card.style.display = 'block';
-                            card.style.animation = 'fadeInUp 0.6s ease-out';
-                        } else {
-                            card.style.display = 'none';
-                        }
+    <!-- Lenis smooth scroll engine -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+
+    <!-- ============================================================
+         PREMIUM MOTION LAYER — Lenis + Cursor + Magnetic + ScrollTrigger
+         ============================================================ -->
+    <script>
+    (function () {
+        'use strict';
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ===================================================
+        // 1. LENIS — fluid, inertia-based smooth scrolling
+        // ===================================================
+        let lenis = null;
+        if (typeof Lenis !== 'undefined') {
+            lenis = new Lenis({
+                duration: 1.15,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 1.6,
+                infinite: false
+            });
+            window.__lenis = lenis;
+
+            // Sync Lenis with GSAP's ticker (single rAF loop = fewer frames dropped)
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            gsap.ticker.lagSmoothing(0);
+        }
+
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        // ===================================================
+        // 2. CUSTOM CURSOR FOLLOWER
+        //    - blend-mode: difference → inverts colors
+        //    - GSAP quickTo → fluid trailing lag
+        //    - scale-up on hover of interactive elements
+        // ===================================================
+        const cursor = document.getElementById('cursor-follower');
+
+        if (cursor && finePointer) {
+            document.body.classList.add('custom-cursor-active');
+            gsap.set(cursor, {
+                xPercent: -50,
+                yPercent: -50,
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2,
+                scale: 1,
+                opacity: 0
+            });
+
+            const cursorX = gsap.quickTo(cursor, 'x', { duration: 0.45, ease: 'power3.out' });
+            const cursorY = gsap.quickTo(cursor, 'y', { duration: 0.45, ease: 'power3.out' });
+
+            let isVisible = false;
+            window.addEventListener('mousemove', (e) => {
+                if (!isVisible) {
+                    isVisible = true;
+                    gsap.to(cursor, { opacity: 1, duration: 0.25, overwrite: 'auto' });
+                }
+                cursorX(e.clientX);
+                cursorY(e.clientY);
+            }, { passive: true });
+
+            document.addEventListener('mouseleave', () => {
+                isVisible = false;
+                gsap.to(cursor, { opacity: 0, duration: 0.2 });
+            });
+            document.addEventListener('mouseenter', () => {
+                isVisible = true;
+                gsap.to(cursor, { opacity: 1, duration: 0.2 });
+            });
+
+            // Scale up on any interactive element
+            const hoverTargets = document.querySelectorAll(
+                'a, button, .filter-btn, .project-card, .course-tag, .project-tag, .interest-card, .contact-method, .back-to-top'
+            );
+            hoverTargets.forEach((el) => {
+                el.addEventListener('mouseenter', () =>
+                    gsap.to(cursor, { scale: 2.4, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+                );
+                el.addEventListener('mouseleave', () =>
+                    gsap.to(cursor, { scale: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+                );
+            });
+        }
+
+        // ===================================================
+        // 3. MAGNETIC PHYSICS — pull toward cursor, elastic snap-back
+        //    Only transform is animated (no layout thrash).
+        // ===================================================
+        function applyMagnetic(selector, opts = {}) {
+            const {
+                strength = 0.4,
+                returnDuration = 0.9,
+                returnEase = 'elastic.out(1, 0.55)'
+            } = opts;
+
+            document.querySelectorAll(selector).forEach((el) => {
+                let rect = null;
+                const xTo = gsap.quickTo(el, 'x', { duration: 0.55, ease: 'power3.out' });
+                const yTo = gsap.quickTo(el, 'y', { duration: 0.55, ease: 'power3.out' });
+
+                el.addEventListener('mouseenter', () => {
+                    rect = el.getBoundingClientRect();
+                }, { passive: true });
+
+                el.addEventListener('mousemove', (e) => {
+                    if (!rect) rect = el.getBoundingClientRect();
+                    const relX = e.clientX - (rect.left + rect.width / 2);
+                    const relY = e.clientY - (rect.top + rect.height / 2);
+                    xTo(relX * strength);
+                    yTo(relY * strength);
+                }, { passive: true });
+
+                el.addEventListener('mouseleave', () => {
+                    rect = null;
+                    gsap.to(el, {
+                        x: 0,
+                        y: 0,
+                        duration: returnDuration,
+                        ease: returnEase,
+                        overwrite: 'auto'
                     });
                 });
             });
-            
-            const animatedElements = document.querySelectorAll('.section, .timeline-item, .project-card, .fact-item');
-            animatedElements.forEach(el => {
-                observer.observe(el);
+        }
+
+        // Small elements get a strong pull, big elements get a gentle one.
+        applyMagnetic('.filter-btn',   { strength: 0.55, returnDuration: 0.85, returnEase: 'elastic.out(1, 0.5)' });
+        applyMagnetic('.btn',          { strength: 0.45, returnDuration: 0.85, returnEase: 'elastic.out(1, 0.5)' });
+        applyMagnetic('.nav a',        { strength: 0.35, returnDuration: 0.8,  returnEase: 'elastic.out(1, 0.55)' });
+        applyMagnetic('.project-card', { strength: 0.08, returnDuration: 1.1,  returnEase: 'elastic.out(1, 0.5)' });
+
+        // ===================================================
+        // 4. SCROLLTRIGGER ENTRANCE ANIMATIONS
+        //    (replaces the old IntersectionObserver)
+        // ===================================================
+        const animatedElements = document.querySelectorAll(
+            '.section:not(#home), .timeline-item, .project-card, .fact-item, .education-card'
+        );
+        animatedElements.forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 55,
+                duration: 0.95,
+                ease: 'power3.out'
             });
         });
 
-        // Force cursor visibility
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.style.cursor = 'auto';
-            document.documentElement.style.cursor = 'auto';
+        // ===================================================
+        // 5. AMBIENT TECH GRID — subtle scroll-linked parallax
+        // ===================================================
+        const grid = document.querySelector('.tech-grid');
+        if (grid) {
+            gsap.to(grid, {
+                y: -80,                 // exactly one grid cell → seamless loop
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: document.body,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.2
+                }
+            });
+        }
+
+        // ===================================================
+        // 6. GSAP PARTICLE ENGINE — no memory leaks, no CSS keyframes
+        // ===================================================
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            document.body.appendChild(particle);
+
+            const startX = Math.random() * window.innerWidth;
+            const startY = window.innerHeight + 10;
+            const size = Math.random() * 6 + 2;
+
+            gsap.set(particle, {
+                x: startX,
+                y: startY,
+                width: size,
+                height: size,
+                opacity: Math.random() * 0.5 + 0.2
+            });
+
+            gsap.to(particle, {
+                y: -50,
+                x: startX + (Math.random() * 100 - 50),
+                opacity: 0,
+                duration: Math.random() * 4 + 3,
+                ease: 'none',
+                onComplete: () => particle.remove()   // <-- hard memory cleanup
+            });
+        }
+
+        // ===================================================
+        // 7. PROJECT FILTER — GSAP dissolve, no `.display` snapping
+        // ===================================================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach((btn) => {
+            btn.addEventListener('click', function () {
+                filterBtns.forEach((b) => b.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.textContent.toLowerCase().trim();
+
+                projectCards.forEach((card) => {
+                    const badgeEl = card.querySelector('.project-badge');
+                    const badge = badgeEl ? badgeEl.textContent.toLowerCase() : '';
+                    const tags = Array.from(card.querySelectorAll('.project-tag'))
+                        .map((t) => t.textContent.toLowerCase());
+                    const allFilters = [badge, ...tags];
+                    const shouldShow = filter === 'all'
+                        || allFilters.some((item) => item.includes(filter));
+
+                    // Kill any in-flight tweens on this card to avoid fighting states
+                    gsap.killTweensOf(card);
+
+                    if (shouldShow) {
+                        card.style.display = 'block';
+                        gsap.fromTo(card,
+                            { opacity: 0, scale: 0.92, y: 24 },
+                            { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power2.out' }
+                        );
+                    } else {
+                        gsap.to(card, {
+                            opacity: 0,
+                            scale: 0.92,
+                            duration: 0.3,
+                            ease: 'power2.in',
+                            onComplete: () => { card.style.display = 'none'; }
+                        });
+                    }
+                });
+            });
         });
+
+        // ===================================================
+        // 8. BOOT — start all background effects + particles
+        // ===================================================
+        window.addEventListener('load', () => {
+            if (typeof createConstellation === 'function') createConstellation();
+            if (typeof createFloatingShapes === 'function') createFloatingShapes();
+
+            // Stagger-spawn initial particles without a CPU spike
+            for (let i = 0; i < 20; i++) {
+                gsap.delayedCall(i * 0.1, createParticle);
+            }
+            setInterval(createParticle, 300);
+
+            // Recalculate trigger positions once everything is laid out
+            ScrollTrigger.refresh();
+        });
+
+        // Accessibility fallback for touch / non-fine-pointer devices
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!finePointer) {
+                document.body.style.cursor = 'auto';
+                document.documentElement.style.cursor = 'auto';
+            }
+        });
+    })();
     </script>
 </body>
 </html>
-
-
